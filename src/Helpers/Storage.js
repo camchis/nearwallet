@@ -47,6 +47,17 @@ export async function getPrivateKey() {
   }
 }
 
+export async function getPublicKey() {
+  try {
+    const publicKey = await AsyncStorage.getItem('PUBLIC_KEY');
+    if (publicKey !== null) {
+      return publicKey;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getAccountID() {
   try {
     const accountID = await AsyncStorage.getItem('ACCOUNT_ID');

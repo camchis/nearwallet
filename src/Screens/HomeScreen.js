@@ -16,12 +16,13 @@ import { AuthContext } from '../App';
 import { sendTx } from '../Helpers/Transactions';
 
 function HomeScreen({ navigation }) {
-  const { accountID, accountDetails, accountBalance, account } = useAccount();
+  const { accountID, accountDetails, accountBalance, account, publicKey } =
+    useAccount();
   const { signOut } = React.useContext(AuthContext);
 
   useEffect(() => {
-    console.log(accountID, accountDetails, accountBalance, account);
-  }, [accountID, accountDetails, accountBalance, account]);
+    console.log(accountID, accountDetails, accountBalance, account, publicKey);
+  }, [accountID, accountDetails, accountBalance, account, publicKey]);
 
   return (
     <SafeAreaView>
@@ -41,11 +42,18 @@ function HomeScreen({ navigation }) {
               onPress={async () => {
                 await sendTx({
                   account,
-                  toUser: 'unitesting1.testnet',
-                  amount: nearAPI.utils.format.parseNearAmount('100'),
+                  contract: accountID,
+                  toUser: 'cameronchis.testnet',
+                  amount: nearAPI.utils.format.parseNearAmount('1'),
                 });
               }}
             />
+            {/* <Button
+              title="Deploy smart contract"
+              onPress={async () => {
+                await deploySmartContract({ accountID, publicKey, account });
+              }}
+            /> */}
             <Button
               title="Reset"
               onPress={async () => {

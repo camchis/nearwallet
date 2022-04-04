@@ -72,16 +72,19 @@ function StartScreen({ navigation }) {
 
     // Create account with generated public key and given account ID
     // This sends a request to the apollo server to create an account
+
+    // Create a new NEAR account with given ID
+    // Add public key as multisig signer
     await createAccount({ variables: 
       {
         "details": {
           "publicKey": publicKey,
-          "accountId": accountIdText,
+          "accountId": accountIdText + ".pochi.testnet",
         }
       } 
     })
-    await saveAccountID(accountIdText);
-    signIn(accountIdText);
+    await saveAccountID(accountIdText + ".pochi.testnet");
+    signIn(accountIdText + ".pochi.testnet");
   };
 
   return (
