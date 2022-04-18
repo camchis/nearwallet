@@ -79,12 +79,15 @@ function StartScreen({ navigation }) {
       {
         "details": {
           "publicKey": publicKey,
-          "accountId": accountIdText + ".pochi.testnet",
+          "accountId": accountIdText,
         }
       } 
     })
-    await saveAccountID(accountIdText + ".pochi.testnet");
-    signIn(accountIdText + ".pochi.testnet");
+
+    let pochiAccountId = accountIdText + ".pochi.testnet"
+
+    await saveAccountID(pochiAccountId);
+    signIn(pochiAccountId);
   };
 
   return (

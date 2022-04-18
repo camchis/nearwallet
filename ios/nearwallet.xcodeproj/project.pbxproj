@@ -12,7 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		5B085AFDC0200EE064363094 /* libPods-nearwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 328454A104814DFC9F31C1CF /* libPods-nearwallet.a */; };
-		7E043DCB27F5E6E2002F5F61 /* wallet_contract.wasm in Resources */ = {isa = PBXBuildFile; fileRef = 7E043DCA27F5E6E2002F5F61 /* wallet_contract.wasm */; };
+		7EC1510F27FC63A000FB4A9C /* wallet_contract.wasm in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B5A5BF2B6B07667885AFE0E7 /* libPods-nearwallet-nearwalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9F85083BF69BB820450A61 /* libPods-nearwallet-nearwalletTests.a */; };
 /* End PBXBuildFile section */
@@ -41,8 +41,7 @@
 		328454A104814DFC9F31C1CF /* libPods-nearwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		481B74CFB0A5B9029C1C0AE2 /* Pods-nearwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.release.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.release.xcconfig"; sourceTree = "<group>"; };
 		7A9F85083BF69BB820450A61 /* libPods-nearwallet-nearwalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet-nearwalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7E043DCA27F5E6E2002F5F61 /* wallet_contract.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; path = wallet_contract.wasm; sourceTree = "<group>"; };
-		7E043DCC27F5E6FE002F5F61 /* wallet_contract.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; path = wallet_contract.wasm; sourceTree = "<group>"; };
+		7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; path = wallet_contract.wasm; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = nearwallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8552385409AAE84AA2F75614 /* Pods-nearwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.debug.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8278EA8F370E42852C64D2 /* Pods-nearwallet-nearwalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet-nearwalletTests.release.xcconfig"; path = "Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,7 +88,6 @@
 		13B07FAE1A68108700A75B9A /* nearwallet */ = {
 			isa = PBXGroup;
 			children = (
-				7E043DCA27F5E6E2002F5F61 /* wallet_contract.wasm */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -113,7 +111,6 @@
 		7ED949D427F481C300F18739 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				7E043DCC27F5E6FE002F5F61 /* wallet_contract.wasm */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -128,6 +125,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */,
 				7ED949D427F481C300F18739 /* Resources */,
 				13B07FAE1A68108700A75B9A /* nearwallet */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -253,7 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E043DCB27F5E6E2002F5F61 /* wallet_contract.wasm in Resources */,
+				7EC1510F27FC63A000FB4A9C /* wallet_contract.wasm in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

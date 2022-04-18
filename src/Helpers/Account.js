@@ -4,11 +4,11 @@ export const getAccount = async (privateKey, accountID) => {
   const keyStore = new nearAPI.keyStores.InMemoryKeyStore();
   const keyPair = nearAPI.KeyPair.fromString(privateKey);
 
-  console.log(keyStore);
+  console.log('keyStore1: ' + keyStore);
 
   await keyStore.setKey('testnet', accountID, keyPair);
 
-  console.log(keyStore);
+  console.log('keyStore2: ' + keyStore);
 
   console.log('private key: ', privateKey);
 

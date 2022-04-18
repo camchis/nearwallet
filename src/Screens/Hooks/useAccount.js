@@ -27,6 +27,7 @@ export default function useAccount() {
     setAccountID(newAccountID);
     setAccount(acct);
     setPublicKey(newPublicKey);
+    console.log('run');
   };
 
   useEffect(() => {
