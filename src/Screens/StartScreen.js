@@ -13,7 +13,8 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-
+import { ActionBar, Button as UIButton, Incubator } from 'react-native-ui-lib';
+const { TextField } = Incubator;
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { generateMnemonic } from '../Helpers/Seed';
 import { PublicKey } from '../Helpers/key_pair';
@@ -31,7 +32,8 @@ mutation CreateAccount($details: Account) {
 function StartScreen({ navigation }) {
   const [accountCreated, setAccountCreated] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
-  const [accountIdText, onChangeText] = React.useState('');
+  const [accountIdText, onChangeAccountIdText] = React.useState('');
+  const [phoneNumberText, onChangePhoneNumberText] = React.useState('');
 
   const [createAccount, { data, loading, error }] =
   useMutation(CREATE_ACCOUNT);
@@ -52,7 +54,7 @@ function StartScreen({ navigation }) {
   }, [data, accountCreated, error])
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    backgroundColor: '#56841d',
   };
 
   // Create new wallet: generate private key with seed phrase and generate public key which will be added to the account
@@ -91,50 +93,65 @@ function StartScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <View >
-          {loading &&
-            <ActivityIndicator size={'large'}/>
-          }
-          {(accountCreated && 
-          <>
-            <Text>Your account {accountIdText} has been created</Text>
-            <Button title="Next Screen" onPress={() => navigation.navigate('Home')} />
-          </>
-          )}
-          {!loading && !accountCreated && (
-            <>
-            <TextInput
-            onChangeText={onChangeText}
-            value={accountIdText}
-            placeholder="Account ID"
-            />
-            <Button title="Create NEAR Account" onPress={handleCreateWallet} />
-            </>
-          )}
+   <View flex={1}>
+     <SafeAreaView backgroundColor='white'/>
+      <View flex={1} backgroundColor='white'>
+        <View backgroundColor='white' style={{minHeight: '5%', alignContent: 'center', marginBottom: '20%'}}>
+          <Text styles={styles.header}>Welcome</Text>
         </View>
-    </SafeAreaView>
+        {loading &&
+          <ActivityIndicator size={'large'}/>
+        }
+        {(accountCreated && 
+        <>
+          <Text>Your account {accountIdText} has been created</Text>
+          <Button title="Next Screen" onPress={() => navigation.navigate('Home')} />
+        </>
+        )}
+        {!loading && !accountCreated && (
+          <View style={{alignItems: 'center'}}>
+            <TextField
+              marginB-30
+              text50M
+              floatingPlaceholder={false}
+              placeholder={'james123'}
+              label={'Account ID'}
+              fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
+              onChangeText={onChangeAccountIdText}
+              autoCapitalize={'none'}
+              autoCorrect={false}
+            />
+            <TextField
+              marginB-70
+              text50M
+              floatingPlaceholder={false}
+              placeholder={'+447517381086'}
+              label={'Phone Number'}
+              fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
+              onChangeText={onChangePhoneNumberText}
+              keyboardType={'phone-pad'}
+            />
+            <UIButton
+              label={'Create wallet'}
+              backgroundColor={'#56841d'}
+              enableShadow={true}
+              onPressOut={handleCreateWallet}
+            />
+          </View>
+        )}
+      </View>
+  </View>
   );
 }
 
-// const styles = StyleSheet.create({
-//   sectionContainer: {
-//     marginTop: 32,
-//     paddingHorizontal: 24,
-//   },
-//   sectionTitle: {
-//     fontSize: 24,
-//     fontWeight: '600',
-//   },
-//   sectionDescription: {
-//     marginTop: 8,
-//     fontSize: 18,
-//     fontWeight: '400',
-//   },
-//   highlight: {
-//     fontWeight: '700',
-//   },
-// });
+const styles = StyleSheet.create({
+  header: {
+    color: 'black', 
+    textAlign: 'center', 
+    fontSize: 30, 
+    fontWeight: 'bold',
+  },
+})
+
 
 export default StartScreen;

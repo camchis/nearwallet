@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAccount } from '../../Helpers/Account';
 import { getAccountID, getPrivateKey, getPublicKey } from '../../Helpers/Storage';
+import { Contract } from 'near-api-js';
 
 export default function useAccount() {
   const [accountDetails, setAccountDetails] = useState();
@@ -8,6 +9,8 @@ export default function useAccount() {
   const [accountID, setAccountID] = useState();
   const [account, setAccount] = useState();
   const [publicKey, setPublicKey] = useState();
+  const [spendLimit, setSpendLimit] = useState();
+  const [spendLeft, setspendLeft] = useState();
 
   console.log('useAccount');
 
@@ -22,6 +25,14 @@ export default function useAccount() {
     const acct = await getAccount(privateKey, newAccountID);
     const newAccountDetails = await acct.getAccountDetails();
     const newAccountBalance = await acct.getAccountBalance();
+    const contract = new Contract(acct, newAccountID, {
+      viewMethods: ['get_daily_spend_limit', 'get_daily_spend_amount'],
+      sender: acct,
+    });
+    const newSpendLimit = await contract.get_daily_spend_limit();
+    const newspendLeft = await contract.get_daily_spend_amount();
+    setSpendLimit(newSpendLimit);
+    setspendLeft(newspendLeft);
     setAccountDetails(newAccountDetails);
     setAccountBalance(newAccountBalance);
     setAccountID(newAccountID);
@@ -34,5 +45,13 @@ export default function useAccount() {
     retrieveAccount();
   });
 
-  return { accountID, accountDetails, accountBalance, account, publicKey };
+  return {
+    accountID,
+    accountDetails,
+    accountBalance,
+    account,
+    publicKey,
+    spendLimit,
+    spendLeft,
+  };
 }

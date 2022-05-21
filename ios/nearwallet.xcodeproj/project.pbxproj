@@ -11,10 +11,10 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		5B085AFDC0200EE064363094 /* libPods-nearwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 328454A104814DFC9F31C1CF /* libPods-nearwallet.a */; };
 		7EC1510F27FC63A000FB4A9C /* wallet_contract.wasm in Resources */ = {isa = PBXBuildFile; fileRef = 7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		B5A5BF2B6B07667885AFE0E7 /* libPods-nearwallet-nearwalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9F85083BF69BB820450A61 /* libPods-nearwallet-nearwalletTests.a */; };
+		A4BF4CF15D6EA29EDAB72017 /* libPods-nearwallet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 653268959C857974DA79BDFD /* libPods-nearwallet.a */; };
+		BE4F8E92BF6350D007449D03 /* libPods-nearwallet-nearwalletTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 26255E6432FC0B2A849808A3 /* libPods-nearwallet-nearwalletTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,20 +31,36 @@
 		00E356EE1AD99517003FC87E /* nearwalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nearwalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nearwalletTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nearwalletTests.m; sourceTree = "<group>"; };
+		061DE9905D4E59A0983C021F /* Pods-nearwallet-nearwalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet-nearwalletTests.debug.xcconfig"; path = "Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests.debug.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* nearwallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nearwallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = nearwallet/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = nearwallet/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nearwallet/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nearwallet/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = nearwallet/main.m; sourceTree = "<group>"; };
-		1D4AD1F2DA8541B40EB33268 /* Pods-nearwallet-nearwalletTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet-nearwalletTests.debug.xcconfig"; path = "Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests.debug.xcconfig"; sourceTree = "<group>"; };
-		328454A104814DFC9F31C1CF /* libPods-nearwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		481B74CFB0A5B9029C1C0AE2 /* Pods-nearwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.release.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.release.xcconfig"; sourceTree = "<group>"; };
-		7A9F85083BF69BB820450A61 /* libPods-nearwallet-nearwalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet-nearwalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AFB755E6294AA619E48E5ED /* Pods-nearwallet-nearwalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet-nearwalletTests.release.xcconfig"; path = "Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		1DD536FDC192D4AC54BCD1F2 /* Pods-nearwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.debug.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.debug.xcconfig"; sourceTree = "<group>"; };
+		26255E6432FC0B2A849808A3 /* libPods-nearwallet-nearwalletTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet-nearwalletTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		653268959C857974DA79BDFD /* libPods-nearwallet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nearwallet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E1391E42837BF43000CC8F4 /* Fontisto.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Fontisto.ttf; sourceTree = "<group>"; };
+		7E1391E52837BF43000CC8F4 /* Octicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Octicons.ttf; sourceTree = "<group>"; };
+		7E1391E62837BF43000CC8F4 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Feather.ttf; sourceTree = "<group>"; };
+		7E1391E72837BF43000CC8F4 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Entypo.ttf; sourceTree = "<group>"; };
+		7E1391E82837BF43000CC8F4 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Brands.ttf; sourceTree = "<group>"; };
+		7E1391E92837BF43000CC8F4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialCommunityIcons.ttf; sourceTree = "<group>"; };
+		7E1391EA2837BF43000CC8F4 /* AntDesign.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AntDesign.ttf; sourceTree = "<group>"; };
+		7E1391EB2837BF43000CC8F4 /* Foundation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Foundation.ttf; sourceTree = "<group>"; };
+		7E1391EC2837BF43000CC8F4 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		7E1391ED2837BF43000CC8F4 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Solid.ttf; sourceTree = "<group>"; };
+		7E1391EE2837BF43000CC8F4 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome5_Regular.ttf; sourceTree = "<group>"; };
+		7E1391EF2837BF43000CC8F4 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		7E1391F02837BF43000CC8F4 /* Zocial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Zocial.ttf; sourceTree = "<group>"; };
+		7E1391F12837BF43000CC8F4 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = EvilIcons.ttf; sourceTree = "<group>"; };
+		7E1391F22837BF43000CC8F4 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SimpleLineIcons.ttf; sourceTree = "<group>"; };
+		7E1391F32837BF43000CC8F4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
 		7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */ = {isa = PBXFileReference; lastKnownFileType = file; path = wallet_contract.wasm; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = nearwallet/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8552385409AAE84AA2F75614 /* Pods-nearwallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.debug.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.debug.xcconfig"; sourceTree = "<group>"; };
-		9B8278EA8F370E42852C64D2 /* Pods-nearwallet-nearwalletTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet-nearwalletTests.release.xcconfig"; path = "Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests.release.xcconfig"; sourceTree = "<group>"; };
+		C05ED3A2C6D360A7A9E8628E /* Pods-nearwallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nearwallet.release.xcconfig"; path = "Target Support Files/Pods-nearwallet/Pods-nearwallet.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -53,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5A5BF2B6B07667885AFE0E7 /* libPods-nearwallet-nearwalletTests.a in Frameworks */,
+				BE4F8E92BF6350D007449D03 /* libPods-nearwallet-nearwalletTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B085AFDC0200EE064363094 /* libPods-nearwallet.a in Frameworks */,
+				A4BF4CF15D6EA29EDAB72017 /* libPods-nearwallet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,10 +118,34 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				328454A104814DFC9F31C1CF /* libPods-nearwallet.a */,
-				7A9F85083BF69BB820450A61 /* libPods-nearwallet-nearwalletTests.a */,
+				653268959C857974DA79BDFD /* libPods-nearwallet.a */,
+				26255E6432FC0B2A849808A3 /* libPods-nearwallet-nearwalletTests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7E1391E32837BF43000CC8F4 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7E1391E42837BF43000CC8F4 /* Fontisto.ttf */,
+				7E1391E52837BF43000CC8F4 /* Octicons.ttf */,
+				7E1391E62837BF43000CC8F4 /* Feather.ttf */,
+				7E1391E72837BF43000CC8F4 /* Entypo.ttf */,
+				7E1391E82837BF43000CC8F4 /* FontAwesome5_Brands.ttf */,
+				7E1391E92837BF43000CC8F4 /* MaterialCommunityIcons.ttf */,
+				7E1391EA2837BF43000CC8F4 /* AntDesign.ttf */,
+				7E1391EB2837BF43000CC8F4 /* Foundation.ttf */,
+				7E1391EC2837BF43000CC8F4 /* Ionicons.ttf */,
+				7E1391ED2837BF43000CC8F4 /* FontAwesome5_Solid.ttf */,
+				7E1391EE2837BF43000CC8F4 /* FontAwesome5_Regular.ttf */,
+				7E1391EF2837BF43000CC8F4 /* FontAwesome.ttf */,
+				7E1391F02837BF43000CC8F4 /* Zocial.ttf */,
+				7E1391F12837BF43000CC8F4 /* EvilIcons.ttf */,
+				7E1391F22837BF43000CC8F4 /* SimpleLineIcons.ttf */,
+				7E1391F32837BF43000CC8F4 /* MaterialIcons.ttf */,
+			);
+			name = Fonts;
+			path = "../node_modules/react-native-vector-icons/Fonts";
 			sourceTree = "<group>";
 		};
 		7ED949D427F481C300F18739 /* Resources */ = {
@@ -126,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				7EC1510E27FC63A000FB4A9C /* wallet_contract.wasm */,
+				7E1391E32837BF43000CC8F4 /* Fonts */,
 				7ED949D427F481C300F18739 /* Resources */,
 				13B07FAE1A68108700A75B9A /* nearwallet */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -151,10 +192,10 @@
 		967200BF9268E0ACB088C514 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8552385409AAE84AA2F75614 /* Pods-nearwallet.debug.xcconfig */,
-				481B74CFB0A5B9029C1C0AE2 /* Pods-nearwallet.release.xcconfig */,
-				1D4AD1F2DA8541B40EB33268 /* Pods-nearwallet-nearwalletTests.debug.xcconfig */,
-				9B8278EA8F370E42852C64D2 /* Pods-nearwallet-nearwalletTests.release.xcconfig */,
+				1DD536FDC192D4AC54BCD1F2 /* Pods-nearwallet.debug.xcconfig */,
+				C05ED3A2C6D360A7A9E8628E /* Pods-nearwallet.release.xcconfig */,
+				061DE9905D4E59A0983C021F /* Pods-nearwallet-nearwalletTests.debug.xcconfig */,
+				1AFB755E6294AA619E48E5ED /* Pods-nearwallet-nearwalletTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -166,11 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "nearwalletTests" */;
 			buildPhases = (
-				F9AE76FD90F771BD79EBBA5F /* [CP] Check Pods Manifest.lock */,
+				9F111E89B70CEF8D2B77B7FD /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				E205FD1DE097F3C84FE6ED18 /* [CP] Copy Pods Resources */,
+				1BE3F0D593C5C5184CB2DBF4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -186,13 +227,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "nearwallet" */;
 			buildPhases = (
-				7503FB369B59D4A817BF67CA /* [CP] Check Pods Manifest.lock */,
+				5A6FED1456B91542412D65F2 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				F503CEAD06D6960EEE3E3C9C /* [CP] Copy Pods Resources */,
+				1EA3B8ED17843D8FFBDB5261 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,7 +315,41 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		7503FB369B59D4A817BF67CA /* [CP] Check Pods Manifest.lock */ = {
+		1BE3F0D593C5C5184CB2DBF4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1EA3B8ED17843D8FFBDB5261 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A6FED1456B91542412D65F2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -296,41 +371,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		E205FD1DE097F3C84FE6ED18 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nearwallet-nearwalletTests/Pods-nearwallet-nearwalletTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F503CEAD06D6960EEE3E3C9C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-nearwallet/Pods-nearwallet-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F9AE76FD90F771BD79EBBA5F /* [CP] Check Pods Manifest.lock */ = {
+		9F111E89B70CEF8D2B77B7FD /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -404,7 +445,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1D4AD1F2DA8541B40EB33268 /* Pods-nearwallet-nearwalletTests.debug.xcconfig */;
+			baseConfigurationReference = 061DE9905D4E59A0983C021F /* Pods-nearwallet-nearwalletTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -431,7 +472,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B8278EA8F370E42852C64D2 /* Pods-nearwallet-nearwalletTests.release.xcconfig */;
+			baseConfigurationReference = 1AFB755E6294AA619E48E5ED /* Pods-nearwallet-nearwalletTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -455,7 +496,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8552385409AAE84AA2F75614 /* Pods-nearwallet.debug.xcconfig */;
+			baseConfigurationReference = 1DD536FDC192D4AC54BCD1F2 /* Pods-nearwallet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -482,7 +523,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 481B74CFB0A5B9029C1C0AE2 /* Pods-nearwallet.release.xcconfig */;
+			baseConfigurationReference = C05ED3A2C6D360A7A9E8628E /* Pods-nearwallet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

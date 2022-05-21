@@ -3,11 +3,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from './Screens/StartScreen';
 import HomeScreen from './Screens/HomeScreen';
+import SendScreen from './Screens/SendScreen';
 import { ApolloProvider } from '@apollo/client';
 import { createApolloClient } from './config/apollo/apollo-client';
 import { getAccountID } from './Helpers/Storage';
-import { resetAllStorage } from './Helpers/Storage';
-
 
 // config
 const Stack = createNativeStackNavigator();
@@ -73,13 +72,24 @@ function App() {
         <AuthContext.Provider value={authStuff}>
           <Stack.Navigator>
             {state.userAccount == null ? (
-              <Stack.Screen name="Start" component={StartScreen} />
-            ) : (
               <Stack.Screen
-                name="Home"
-                component={HomeScreen}
+                name="Welcome"
+                component={StartScreen}
                 options={{ headerShown: false }}
               />
+            ) : (
+              <>
+                <Stack.Screen
+                  name="Home"
+                  component={HomeScreen}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name="Send"
+                  component={SendScreen}
+                  options={{ headerShown: false }}
+                />
+              </>
             )}
           </Stack.Navigator>
         </AuthContext.Provider>
