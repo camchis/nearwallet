@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {
-  Button,
   Pressable,
   SafeAreaView,
   StatusBar,
@@ -15,7 +14,7 @@ import { AuthContext } from '../App';
 import { deployContract, sendTx } from '../Helpers/Transactions';
 import { gql, useMutation } from '@apollo/client';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import { Button, LoaderScreen } from 'react-native-ui-lib';
 
 const CONFIRM_TX = gql`
   mutation ConfirmTx($requestId: String, $accountId: String) {
@@ -30,30 +29,61 @@ const SEND_SMS_CODE = gql`
 `;
 
 const CONFIRM_SMS_CODE = gql`
-  mutation ConfirmTx($requestId: String, $accountId: String, $phoneNumber: String, $code: String) {
-    confirmTx(requestId: $requestId, accountId: $accountId, phoneNumber: $phoneNumber, code: $code)
+  mutation ConfirmTx(
+    $requestId: String
+    $accountId: String
+    $phoneNumber: String
+    $code: String
+  ) {
+    confirmTx(
+      requestId: $requestId
+      accountId: $accountId
+      phoneNumber: $phoneNumber
+      code: $code
+    )
   }
 `;
 
 function HomeScreen({ navigation }) {
-  const {
-    accountID,
-    accountDetails,
-    accountBalance,
-    account,
-    publicKey,
-    spendLimit,
-    spendLeft,
-  } = useAccount();
+  const { accountID, accountDetails, account, publicKey } = useAccount();
   const { signOut } = React.useContext(AuthContext);
 
+  const [accountBalance, setAccountBalance] = useState();
+  const [spendLimit, setSpendLimit] = useState();
+  const [spendLeft, setSpendLeft] = useState();
+  const [loadingBalance, setLoadingBalance] = useState(false);
+
   const [confirmTx, { data, loading, error }] = useMutation(CONFIRM_TX);
-  const [sendSms, { send_data, send_loading, send_error }] = useMutation(SEND_SMS_CODE);
-  const [confirmSms, { confirm_data, confirm_loading, confirm_error }] = useMutation(CONFIRM_SMS_CODE);
+  const [sendSms, { send_data, send_loading, send_error }] =
+    useMutation(SEND_SMS_CODE);
+  const [confirmSms, { confirm_data, confirm_loading, confirm_error }] =
+    useMutation(CONFIRM_SMS_CODE);
 
   const [opacity, setOpacity] = useState(1);
 
   useEffect(() => {
+    async function updateBalance() {
+      setLoadingBalance(true);
+      const contract = new nearAPI.Contract(account, accountID, {
+        viewMethods: ['get_daily_spend_limit', 'get_daily_spend_amount'],
+        sender: accountID,
+      });
+      const newAccountBalance = await account.getAccountBalance();
+      const newSpendLimit = await contract.get_daily_spend_limit();
+      const newspendLeft = await contract.get_daily_spend_amount();
+      setSpendLimit(newSpendLimit);
+      setSpendLeft(newspendLeft);
+      setAccountBalance(newAccountBalance);
+      setLoadingBalance(false);
+    }
+    const unsubscribe = navigation.addListener('focus', () => {
+      updateBalance();
+      console.log('refresh');
+    });
+    if (!accountBalance) {
+      updateBalance();
+    }
+    console.log('running home screen');
     console.log(
       accountID,
       accountDetails,
@@ -63,6 +93,7 @@ function HomeScreen({ navigation }) {
       spendLimit,
       spendLeft,
     );
+    return unsubscribe;
   }, [
     accountID,
     accountDetails,
@@ -71,42 +102,55 @@ function HomeScreen({ navigation }) {
     publicKey,
     spendLimit,
     spendLeft,
+    navigation,
   ]);
 
   return (
     <SafeAreaView flex={1}>
       <StatusBar />
       <View flex={1}>
-        {accountID && (
+        {accountID && !loadingBalance && (
           <View>
             <View
-              marginTop={'30%'}
+              marginTop={'15%'}
               style={{ alignItems: 'center' }}
-              marginBottom={'25%'}
+              marginBottom={'15%'}
             >
               <Text style={styles.mainText}>{accountID}</Text>
+              <Text style={styles.balanceUsdText}>
+                $
+                {(
+                  parseFloat(
+                    nearAPI.utils.format.formatNearAmount(
+                      accountBalance?.available,
+                    ),
+                  ) * 6
+                ).toFixed(2)}
+              </Text>
               <Text style={styles.balanceText}>
                 {parseFloat(
                   nearAPI.utils.format.formatNearAmount(
-                    accountBalance.available,
+                    accountBalance?.available,
                   ),
                 ).toFixed(2)}
                 {' Ⓝ'}
               </Text>
-              <Text style={styles.spendingLimitText}>${parseInt(spendLimit - spendLeft).toFixed(2)} Spend Remaining</Text>
+              <Text style={styles.spendingLimitText}>
+                ${parseFloat(spendLimit - spendLeft).toFixed(2)} Spend Remaining
+                Today
+              </Text>
             </View>
             <View
               flexDirection="row"
               alignItems="center"
               justifyContent="center"
+              paddingBottom={'50%'}
             >
-              <Pressable
-                alignItems="center"
-                onPressIn={() => {
-                  setOpacity(0.5);
-                }}
+              <Button
+                label={'Send'}
+                backgroundColor={'#56841d'}
+                enableShadow={true}
                 onPressOut={() => {
-                  setOpacity(1);
                   navigation.navigate('Send', {
                     accountID,
                     accountDetails,
@@ -117,60 +161,22 @@ function HomeScreen({ navigation }) {
                     spendLeft,
                   });
                 }}
-                opacity={opacity}
-              >
-                <Icon name="send-circle-outline" size={80} color="#56841d" style={styles.button}/>
-              </Pressable>
-              <Button
-                title="Send"
-                onPress={async () => {
-                  await sendTx({
-                    account,
-                    contract: accountID,
-                    toUser: 'cameronchis.testnet',
-                    amount: nearAPI.utils.format.parseNearAmount('1'),
-                  });
-                }}
               />
             </View>
             <Button
-              title="Send SMS"
-              onPress={async () => {
-                await sendSms({
-                  variables: {
-                    "phoneNumber": "+447429539138",
-                  },
-                });
-              }}
-            />
-            <Button
-              title="Confirm with code"
-              onPress={async () => {
-                await confirmSms({
-                  variables: {
-                    "requestId": "1",
-                    "accountId": accountID,
-                    "phoneNumber": "+447429539138",
-                    "code": "576086",
-                  },
-                });
-              }}
-            />
-            <Button
-              title="Reset"
+              size={Button.sizes.xSmall}
+              marginL-5
+              style={{ maxWidth: '10%' }}
+              backgroundColor={'#b30018'}
+              label="Reset"
               onPress={async () => {
                 await resetAllStorage();
                 signOut();
               }}
             />
-            <Button
-              title="Deploy"
-              onPress={async () => {
-                await deployContract({ account, accountId: accountID });
-              }}
-            />
           </View>
         )}
+        {loadingBalance && <LoaderScreen color="black" />}
       </View>
     </SafeAreaView>
   );
@@ -179,11 +185,15 @@ function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   mainText: {
     fontSize: 30,
-    marginBottom: '5%',
+    marginBottom: '7%',
   },
   balanceText: {
+    fontSize: 30,
+    marginBottom: '10%',
+  },
+  balanceUsdText: {
     fontSize: 50,
-    marginBottom: '5%',
+    marginBottom: '2%',
   },
   spendingLimitText: {
     fontSize: 17,

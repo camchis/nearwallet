@@ -6,6 +6,7 @@ const {
   keyStores,
   WalletConnection,
   utils,
+  providers,
   transactions,
 } = require('near-api-js');
 
@@ -13,10 +14,8 @@ export async function sendTx({ account, contract, toUser, amount }) {
   try {
     const args = {
       request: {
-        receiver_id: 'pochi.testnet',
-        actions: [
-          { type: 'Transfer', amount: utils.format.parseNearAmount('1') },
-        ],
+        receiver_id: toUser,
+        actions: [{ type: 'Transfer', amount }],
       },
     };
     let tx = await account.signAndSendTransaction({
@@ -30,9 +29,24 @@ export async function sendTx({ account, contract, toUser, amount }) {
         ),
       ],
     });
-
-    console.log(tx);
+    console.log(tx["receipts_outcome"][5]["outcome"]["logs"]);
+    //return tx;
+    if (tx["receipts_outcome"][5]["outcome"]["logs"][5]) {
+      return tx["receipts_outcome"][5]["outcome"]["logs"][5];
+    } else {
+      return false;
+    }
   } catch (error) {
     console.log(error);
+    return error;
   }
+}
+
+export async function getTxStatus(txHash, accountId) {
+  const provider = new providers.JsonRpcProvider(
+    'https://archival-rpc.testnet.near.org',
+  );
+  const result = await provider.txStatus(txHash, accountId);
+  console.log(result);
+  return result;
 }

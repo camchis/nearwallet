@@ -31,9 +31,13 @@ mutation CreateAccount($details: Account) {
 
 function StartScreen({ navigation }) {
   const [accountCreated, setAccountCreated] = useState(false);
+  const [accountIdComplete, setAccountIdComplete] = React.useState(false);
+  const [phoneNumberComplete, setPhoneNumberComplete] = React.useState(false);
+
   const isDarkMode = useColorScheme() === 'dark';
   const [accountIdText, onChangeAccountIdText] = React.useState('');
   const [phoneNumberText, onChangePhoneNumberText] = React.useState('');
+  const [spendLimitText, onChangeSpendLimitText] = React.useState('');
 
   const [createAccount, { data, loading, error }] =
   useMutation(CREATE_ACCOUNT);
@@ -82,6 +86,7 @@ function StartScreen({ navigation }) {
         "details": {
           "publicKey": publicKey,
           "accountId": accountIdText,
+          "spendLimit": spendLimitText,
         }
       } 
     })
@@ -97,7 +102,7 @@ function StartScreen({ navigation }) {
      <SafeAreaView backgroundColor='white'/>
       <View flex={1} backgroundColor='white'>
         <View backgroundColor='white' style={{minHeight: '5%', alignContent: 'center', marginBottom: '20%'}}>
-          <Text styles={styles.header}>Welcome</Text>
+          <Text style={styles.header}>Welcome</Text>
         </View>
         {loading &&
           <ActivityIndicator size={'large'}/>
@@ -110,33 +115,68 @@ function StartScreen({ navigation }) {
         )}
         {!loading && !accountCreated && (
           <View style={{alignItems: 'center'}}>
-            <TextField
-              marginB-30
-              text50M
-              floatingPlaceholder={false}
-              placeholder={'james123'}
-              label={'Account ID'}
-              fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
-              onChangeText={onChangeAccountIdText}
-              autoCapitalize={'none'}
-              autoCorrect={false}
-            />
-            <TextField
-              marginB-70
-              text50M
-              floatingPlaceholder={false}
-              placeholder={'+447517381086'}
-              label={'Phone Number'}
-              fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
-              onChangeText={onChangePhoneNumberText}
-              keyboardType={'phone-pad'}
-            />
-            <UIButton
-              label={'Create wallet'}
-              backgroundColor={'#56841d'}
-              enableShadow={true}
-              onPressOut={handleCreateWallet}
-            />
+            {!phoneNumberComplete && !accountIdComplete && (
+              <>
+                <TextField
+                  marginB-70
+                  text50M
+                  floatingPlaceholder={false}
+                  placeholder={'james123'}
+                  label={'Account ID'}
+                  fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
+                  onChangeText={onChangeAccountIdText}
+                  autoCapitalize={'none'}
+                  autoCorrect={false}
+                />
+                <UIButton
+                  label={'Next'}
+                  backgroundColor={'#56841d'}
+                  enableShadow={true}
+                  onPressOut={() => setAccountIdComplete(true)}
+                />
+              </>
+            )}
+            {!phoneNumberComplete && accountIdComplete && (
+              <>
+                <TextField
+                  marginB-70
+                  text50M
+                  floatingPlaceholder={false}
+                  placeholder={'+447517381086'}
+                  label={'Phone Number'}
+                  fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
+                  onChangeText={onChangePhoneNumberText}
+                  keyboardType={'phone-pad'}
+                />
+                  <UIButton
+                  label={'Next'}
+                  backgroundColor={'#56841d'}
+                  enableShadow={true}
+                  onPressOut={() => setPhoneNumberComplete(true)}
+                />
+              </>
+            )}
+            {phoneNumberComplete && accountIdComplete && (
+              <>
+              <TextField
+                marginB-70
+                text50M
+                floatingPlaceholder={false}
+                placeholder={'1000'}
+                label={'Daily Spend Limit'}
+                fieldStyle={{borderColor: 'grey', borderBottomWidth: 1, width: '80%'}}
+                onChangeText={onChangeSpendLimitText}
+                keyboardType={'phone-pad'}
+                leadingAccessory={<Text style={styles.dollarSign}>$</Text>}
+              />
+                <UIButton
+                label={'Create Wallet'}
+                backgroundColor={'#56841d'}
+                enableShadow={true}
+                onPressOut={handleCreateWallet}
+              />
+            </>
+            )}
           </View>
         )}
       </View>
@@ -150,6 +190,10 @@ const styles = StyleSheet.create({
     textAlign: 'center', 
     fontSize: 30, 
     fontWeight: 'bold',
+  },
+  dollarSign: {
+    fontSize: 25,
+    paddingLeft: 5,
   },
 })
 

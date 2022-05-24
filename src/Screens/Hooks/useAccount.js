@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getAccount } from '../../Helpers/Account';
-import { getAccountID, getPrivateKey, getPublicKey } from '../../Helpers/Storage';
+import {
+  getAccountID,
+  getPrivateKey,
+  getPublicKey,
+} from '../../Helpers/Storage';
 import { Contract } from 'near-api-js';
 
 export default function useAccount() {
@@ -10,7 +14,7 @@ export default function useAccount() {
   const [account, setAccount] = useState();
   const [publicKey, setPublicKey] = useState();
   const [spendLimit, setSpendLimit] = useState();
-  const [spendLeft, setspendLeft] = useState();
+  const [spendLeft, setSpendLeft] = useState();
 
   console.log('useAccount');
 
@@ -32,7 +36,7 @@ export default function useAccount() {
     const newSpendLimit = await contract.get_daily_spend_limit();
     const newspendLeft = await contract.get_daily_spend_amount();
     setSpendLimit(newSpendLimit);
-    setspendLeft(newspendLeft);
+    setSpendLeft(newspendLeft);
     setAccountDetails(newAccountDetails);
     setAccountBalance(newAccountBalance);
     setAccountID(newAccountID);
