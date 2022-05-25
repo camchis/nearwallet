@@ -6,7 +6,7 @@ import HomeScreen from './Screens/HomeScreen';
 import SendScreen from './Screens/SendScreen';
 import { ApolloProvider } from '@apollo/client';
 import { createApolloClient } from './config/apollo/apollo-client';
-import { getAccountID } from './Helpers/Storage';
+import { getAccountID, resetAllStorage } from './Helpers/Storage';
 
 // config
 const Stack = createNativeStackNavigator();
@@ -47,7 +47,7 @@ function App() {
 
   React.useEffect(() => {
     const checkAccount = async () => {
-      //await resetAllStorage();
+    //  await resetAllStorage();
       let userAccount = await getAccountID();
       if (userAccount) {
         dispatch({ type: 'RESTORE_ACCOUNT', account: userAccount });

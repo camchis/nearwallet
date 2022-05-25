@@ -18,19 +18,51 @@ import { getTxStatus, sendTx } from '../Helpers/Transactions';
 import { gql, useMutation } from '@apollo/client';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+// sms API calls
+const SEND_SMS_CODE = gql`
+  mutation SendSmsCode($phoneNumber: String) {
+    sendSmsCode(phoneNumber: $phoneNumber)
+  }
+`;
+
+const CONFIRM_SMS_CODE = gql`
+  mutation ConfirmTx(
+    $requestId: String
+    $accountId: String
+    $phoneNumber: String
+    $code: String
+  ) {
+    confirmTx(
+      requestId: $requestId
+      accountId: $accountId
+      phoneNumber: $phoneNumber
+      code: $code
+    )
+  }
+`;
+
 function SendScreen({ route, navigation }) {
   const { account, accountBalance, accountID, spendLeft, spendLimit } =
     route.params;
   const [amountNumber, onChangeAmountNumber] = React.useState('');
   const [address, onChangeAddressText] = React.useState('');
+  const [code, onChangeCode] = React.useState('');
+
   const [error, setError] = React.useState(false);
-  const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
   const [success, setSuccess] = useState(false);
 
   const readableBalance = parseFloat(
     nearAPI.utils.format.formatNearAmount(accountBalance.available),
   ).toFixed(2);
+
+  const [sendSms, { send_data, send_loading, send_error }] =
+    useMutation(SEND_SMS_CODE);
+  const [confirmSms, { confirm_data, confirm_loading, confirm_error }] =
+    useMutation(CONFIRM_SMS_CODE);
 
   useEffect(() => {
     if (amountNumber) {
@@ -59,6 +91,43 @@ function SendScreen({ route, navigation }) {
     }
   }
 
+  async function handleSendTx() {
+    const sendAmount = parseFloat(amountNumber) / 6;
+    setSending(true);
+    const response = await sendTx({
+      account,
+      contract: accountID,
+      toUser: address,
+      amount: nearAPI.utils.format.parseNearAmount(sendAmount.toString()),
+    });
+    setSent(true);
+    setSending(false);
+    await sendSms({
+      variables: {
+        phoneNumber: '+447429539138',
+      },
+    });
+  }
+
+  async function handleConfirmTx() {
+    setConfirming(true);
+    const contract = new nearAPI.Contract(account, accountID, {
+      viewMethods: ['list_request_ids'],
+      sender: accountID,
+    });
+    const request_ids = await contract.list_request_ids();
+    const response = await confirmSms({
+      variables: {
+        requestId: request_ids[0].toString(),
+        accountId: accountID,
+        phoneNumber: '+447429539138',
+        code: code,
+      },
+    });
+    console.log(response);
+    setConfirming(false);
+  }
+
   return (
     <SafeAreaView flex={1} backgroundColor="white">
       <StatusBar />
@@ -77,7 +146,7 @@ function SendScreen({ route, navigation }) {
         </Pressable>
         <Text style={styles.header}>Send</Text>
       </View>
-      {!loading && !sent && (
+      {!sending && !sent && (
         <>
           <View
             marginBottom={'5%'}
@@ -124,39 +193,46 @@ function SendScreen({ route, navigation }) {
               enableShadow={true}
               label={'Send'}
               disabled={error}
-              onPressOut={async () => {
-                const sendAmount = parseFloat(amountNumber) / 6;
-                setLoading(true);
-                const response = await sendTx({
-                  account,
-                  contract: accountID,
-                  toUser: address,
-                  amount: nearAPI.utils.format.parseNearAmount(
-                    sendAmount.toString(),
-                  ),
-                });
-                console.log(response);
-                if (response === 'True') {
-                  setLoading(false);
-                  setSent(true);
-                  setSuccess(true);
-                } else {
-                  setLoading(false);
-                  setSent(true);
-                  setSuccess(false);
-                }
-              }}
+              onPressOut={async () => await handleSendTx()}
             />
           </View>
         </>
       )}
-      {loading && !sent && (
+      {sending && (
+        <LoaderScreen message={'Initialising transaction...'} color="black" />
+      )}
+      {sent && (
+        <View marginTop={10} alignItems={'center'}>
+          <Text style={styles.pendingText}>Confirm Transaction </Text>
+          <Text style={styles.pendingTextDescription}>
+            SMS code sent to +447429539138
+          </Text>
+          <TextField
+            style={styles.codeInput}
+            placeholder="Code"
+            autoCapitalize="none"
+            autoCorrect={false}
+            keyboardType="number-pad"
+            maxLength={6}
+            onChangeText={onChangeCode}
+          />
+          <Button
+            marginT-30
+            backgroundColor={'#56841d'}
+            enableShadow={true}
+            label={'Send'}
+            disabled={error}
+            onPressOut={async () => await handleConfirmTx()}
+          />
+        </View>
+      )}
+      {confirming && (
         <LoaderScreen
           message={'Sending $' + amountNumber + ' to ' + address}
           color="black"
         />
       )}
-      {!loading && sent && success && (
+      {!sending && confirmed && success && (
         <View marginTop={10}>
           <Text style={styles.successText}>Success!</Text>
           <Text style={styles.successTextDescription}>
@@ -164,7 +240,7 @@ function SendScreen({ route, navigation }) {
           </Text>
         </View>
       )}
-      {!loading && sent && !success && (
+      {!sending && confirmed && !success && (
         <View marginTop={10}>
           <Text style={styles.failureText}>Transaction Failed</Text>
           <Text style={styles.failureTextDescription}>
@@ -194,6 +270,18 @@ const styles = StyleSheet.create({
     color: 'black',
     padding: 10,
     fontSize: 20,
+  },
+  codeInput: {
+    height: 40,
+    margin: 12,
+    width: 100,
+    borderBottomWidth: 1,
+    borderColor: 'black',
+    color: 'black',
+    padding: 10,
+    fontSize: 20,
+    alignSelf: 'center',
+    textAlign: 'center',
   },
   buttonText: {
     color: 'black',
@@ -245,6 +333,17 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: '#b30018',
+  },
+  pendingText: {
+    fontSize: 25,
+    textAlign: 'center',
+    color: 'black',
+    marginBottom: 10,
+  },
+  pendingTextDescription: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'grey',
   },
   header: {
     color: 'black',

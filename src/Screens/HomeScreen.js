@@ -54,10 +54,6 @@ function HomeScreen({ navigation }) {
   const [loadingBalance, setLoadingBalance] = useState(false);
 
   const [confirmTx, { data, loading, error }] = useMutation(CONFIRM_TX);
-  const [sendSms, { send_data, send_loading, send_error }] =
-    useMutation(SEND_SMS_CODE);
-  const [confirmSms, { confirm_data, confirm_loading, confirm_error }] =
-    useMutation(CONFIRM_SMS_CODE);
 
   const [opacity, setOpacity] = useState(1);
 

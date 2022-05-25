@@ -29,13 +29,8 @@ export async function sendTx({ account, contract, toUser, amount }) {
         ),
       ],
     });
-    console.log(tx["receipts_outcome"][5]["outcome"]["logs"]);
-    //return tx;
-    if (tx["receipts_outcome"][5]["outcome"]["logs"][5]) {
-      return tx["receipts_outcome"][5]["outcome"]["logs"][5];
-    } else {
-      return false;
-    }
+    console.log(tx);
+    return tx;
   } catch (error) {
     console.log(error);
     return error;
