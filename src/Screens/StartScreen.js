@@ -132,6 +132,7 @@ function StartScreen({ navigation }) {
                   label={'Next'}
                   backgroundColor={'#56841d'}
                   enableShadow={true}
+                  disabled={accountIdText === ''}
                   onPressOut={() => setAccountIdComplete(true)}
                 />
               </>
@@ -152,6 +153,7 @@ function StartScreen({ navigation }) {
                   label={'Next'}
                   backgroundColor={'#56841d'}
                   enableShadow={true}
+                  disabled={phoneNumberText === ''}
                   onPressOut={() => setPhoneNumberComplete(true)}
                 />
               </>
@@ -173,6 +175,7 @@ function StartScreen({ navigation }) {
                 label={'Create Wallet'}
                 backgroundColor={'#56841d'}
                 enableShadow={true}
+                disabled={spendLimitText === ''}
                 onPressOut={handleCreateWallet}
               />
             </>
