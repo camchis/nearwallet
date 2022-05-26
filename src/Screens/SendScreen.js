@@ -17,6 +17,7 @@ import { AuthContext } from '../App';
 import { getTxStatus, sendTx } from '../Helpers/Transactions';
 import { gql, useMutation } from '@apollo/client';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import ReactNativeBiometrics from 'react-native-biometrics';
 
 // sms API calls
 const SEND_SMS_CODE = gql`
@@ -61,7 +62,7 @@ function SendScreen({ route, navigation }) {
 
   const [sendSms, { send_data, send_loading, send_error }] =
     useMutation(SEND_SMS_CODE);
-  const [confirmSms, { confirm_data, confirm_loading, confirm_error }] =
+  const [confirmSms, { loading: confirm_loading, data: confirm_data }] =
     useMutation(CONFIRM_SMS_CODE);
 
   useEffect(() => {
@@ -75,7 +76,7 @@ function SendScreen({ route, navigation }) {
     } else {
       setError(true);
     }
-  }, [amountNumber, readableBalance]);
+  }, [amountNumber, confirm_data, confirm_loading, readableBalance]);
 
   function renderTrailingText() {
     if (amountNumber) {
@@ -100,13 +101,26 @@ function SendScreen({ route, navigation }) {
       toUser: address,
       amount: nearAPI.utils.format.parseNearAmount(sendAmount.toString()),
     });
-    setSent(true);
-    setSending(false);
-    await sendSms({
-      variables: {
-        phoneNumber: '+447429539138',
-      },
-    });
+    ReactNativeBiometrics.simplePrompt({ promptMessage: 'Confirm Face ID' })
+      .then(async resultObject => {
+        const { success } = resultObject;
+
+        if (success) {
+          console.log('successful biometrics provided');
+          setSent(true);
+          setSending(false);
+          await sendSms({
+            variables: {
+              phoneNumber: '+447429539138',
+            },
+          });
+        } else {
+          console.log('user cancelled biometric prompt');
+        }
+      })
+      .catch(() => {
+        console.log('biometrics failed');
+      });
   }
 
   async function handleConfirmTx() {
@@ -125,7 +139,16 @@ function SendScreen({ route, navigation }) {
       },
     });
     console.log(response);
-    setConfirming(false);
+    console.log(response.data?.confirmTx);
+    if (response.data?.confirmTx === 'Success') {
+      setSuccess(true);
+      setConfirmed(true);
+      setConfirming(false);
+    } else {
+      setSuccess(false);
+      setConfirmed(true);
+      setConfirming(false);
+    }
   }
 
   return (
@@ -201,7 +224,7 @@ function SendScreen({ route, navigation }) {
       {sending && (
         <LoaderScreen message={'Initialising transaction...'} color="black" />
       )}
-      {sent && (
+      {sent && !confirming && !confirmed && (
         <View marginTop={10} alignItems={'center'}>
           <Text style={styles.pendingText}>Confirm Transaction </Text>
           <Text style={styles.pendingTextDescription}>
@@ -232,7 +255,7 @@ function SendScreen({ route, navigation }) {
           color="black"
         />
       )}
-      {!sending && confirmed && success && (
+      {!sending && !confirming && confirmed && sent && success && (
         <View marginTop={10}>
           <Text style={styles.successText}>Success!</Text>
           <Text style={styles.successTextDescription}>
@@ -240,11 +263,14 @@ function SendScreen({ route, navigation }) {
           </Text>
         </View>
       )}
-      {!sending && confirmed && !success && (
+      {!sending && !confirming && confirmed && sent && !success && (
         <View marginTop={10}>
           <Text style={styles.failureText}>Transaction Failed</Text>
           <Text style={styles.failureTextDescription}>
             {'Failed to send $' + amountNumber + ' to ' + address}
+          </Text>
+          <Text style={styles.failureTextDescription}>
+            {'Over daily spend limit'}
           </Text>
         </View>
       )}
@@ -333,6 +359,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     color: '#b30018',
+    marginBottom: 4,
   },
   pendingText: {
     fontSize: 25,
